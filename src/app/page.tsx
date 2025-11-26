@@ -328,13 +328,13 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-white text-gray-900 overflow-hidden">
+    <main className="min-h-screen bg-white text-gray-900 overflow-hidden scroll-smooth">
       {/* Navigation */}
       <motion.nav 
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative z-50 w-full px-6 py-4 bg-gray-900/95 backdrop-blur-sm"
+        className="fixed top-0 left-0 right-0 z-50 w-full px-6 py-4 bg-gray-900/95 backdrop-blur-sm shadow-lg"
       >
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center gap-3">
@@ -347,11 +347,11 @@ export default function Home() {
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            <a href="#home" className="text-white hover:text-cyan-400 transition-colors">HOME</a>
-            <a href="/3d/About" className="text-white hover:text-cyan-400 transition-colors">ABOUT</a>
-            <a href="#courses" className="text-white hover:text-cyan-400 transition-colors">COURSES</a>
-            <a href="#features" className="text-white hover:text-cyan-400 transition-colors">PAGES</a>
-            <a href="/3d/Contact" className="text-white hover:text-cyan-400 transition-colors">CONTACT</a>
+            <a href="#home" className="text-white hover:text-cyan-400 transition-colors cursor-pointer">HOME</a>
+            <Link href="/3d/About" className="text-white hover:text-cyan-400 transition-colors">ABOUT</Link>
+            <a href="#modules" className="text-white hover:text-cyan-400 transition-colors cursor-pointer">COURSES</a>
+            <a href="#features" className="text-white hover:text-cyan-400 transition-colors cursor-pointer">FEATURES</a>
+            <Link href="/3d/Contact" className="text-white hover:text-cyan-400 transition-colors">CONTACT</Link>
             <Link href="/3d/LogIn">
               <button className="px-5 py-2 rounded border-2 border-white text-white font-semibold hover:bg-white hover:text-gray-900 transition-all">
                 Login
@@ -366,8 +366,11 @@ export default function Home() {
         </div>
       </motion.nav>
 
+      {/* Spacer for fixed navbar */}
+      <div className="h-[72px]"></div>
+
       {/* Hero Section */}
-      <section className="relative min-h-[700px] flex items-center" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <section id="home" className="relative min-h-[700px] flex items-center scroll-mt-20" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-gray-900/70"></div>
         
@@ -420,8 +423,23 @@ export default function Home() {
       </section>
 
       {/* Key Features with Circular Icons */}
-      <section id="features" className="relative bg-white py-20">
+      <section id="features" className="relative bg-white py-20 scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              What We Offer
+            </h2>
+            <p className="text-xl text-gray-600">
+              Everything you need to succeed in your learning journey
+            </p>
+          </motion.div>
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Feature 1 - Online Courses */}
             <motion.div
@@ -433,18 +451,15 @@ export default function Home() {
             >
               <div className="relative inline-block mb-6">
                 {/* Outer cyan ring */}
-                <div className="w-40 h-40 rounded-full border-8 border-cyan-400 flex items-center justify-center mx-auto relative">
-                  {/* Inner white circle */}
-                  <div className="w-32 h-32 rounded-full bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
-                      <ambientLight intensity={0.6} />
-                      <directionalLight position={[2, 2, 2]} intensity={0.8} />
-                      <Float speed={2} rotationIntensity={0.3}>
-                        <Box args={[0.6, 0.4, 0.1]}>
-                          <meshStandardMaterial color="#06b6d4" roughness={0.3} metalness={0.7} />
-                        </Box>
-                      </Float>
-                    </Canvas>
+                <div className="w-40 h-40 rounded-full border-8 border-cyan-400 flex items-center justify-center mx-auto relative overflow-hidden">
+                  {/* Background Image */}
+                  <div className="absolute inset-0 rounded-full overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=400&h=400&fit=crop" 
+                      alt="Online Courses"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-cyan-500/30 group-hover:bg-cyan-500/20 transition-all duration-300"></div>
                   </div>
                 </div>
               </div>
@@ -463,17 +478,14 @@ export default function Home() {
               className="text-center group"
             >
               <div className="relative inline-block mb-6">
-                <div className="w-40 h-40 rounded-full border-8 border-yellow-400 flex items-center justify-center mx-auto relative">
-                  <div className="w-32 h-32 rounded-full bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
-                      <ambientLight intensity={0.6} />
-                      <directionalLight position={[2, 2, 2]} intensity={0.8} />
-                      <Float speed={2} rotationIntensity={0.3}>
-                        <Box args={[0.5, 0.7, 0.15]}>
-                          <meshStandardMaterial color="#fbbf24" roughness={0.3} metalness={0.7} />
-                        </Box>
-                      </Float>
-                    </Canvas>
+                <div className="w-40 h-40 rounded-full border-8 border-yellow-400 flex items-center justify-center mx-auto relative overflow-hidden">
+                  <div className="absolute inset-0 rounded-full overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=400&fit=crop" 
+                      alt="Books & Library"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-yellow-400/30 group-hover:bg-yellow-400/20 transition-all duration-300"></div>
                   </div>
                 </div>
               </div>
@@ -492,20 +504,14 @@ export default function Home() {
               className="text-center group"
             >
               <div className="relative inline-block mb-6">
-                <div className="w-40 h-40 rounded-full border-8 border-cyan-400 flex items-center justify-center mx-auto relative">
-                  <div className="w-32 h-32 rounded-full bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
-                      <ambientLight intensity={0.6} />
-                      <directionalLight position={[2, 2, 2]} intensity={0.8} />
-                      <Float speed={2} rotationIntensity={0.3}>
-                        <Sphere args={[0.35, 32, 32]}>
-                          <meshStandardMaterial color="#06b6d4" roughness={0.3} metalness={0.7} />
-                        </Sphere>
-                        <Sphere args={[0.15, 16, 16]} position={[-0.3, 0, 0.3]}>
-                          <meshStandardMaterial color="#06b6d4" roughness={0.3} metalness={0.7} />
-                        </Sphere>
-                      </Float>
-                    </Canvas>
+                <div className="w-40 h-40 rounded-full border-8 border-cyan-400 flex items-center justify-center mx-auto relative overflow-hidden">
+                  <div className="absolute inset-0 rounded-full overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&h=400&fit=crop" 
+                      alt="Great Teachers"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-cyan-500/30 group-hover:bg-cyan-500/20 transition-all duration-300"></div>
                   </div>
                 </div>
               </div>
@@ -524,17 +530,14 @@ export default function Home() {
               className="text-center group"
             >
               <div className="relative inline-block mb-6">
-                <div className="w-40 h-40 rounded-full border-8 border-yellow-400 flex items-center justify-center mx-auto relative">
-                  <div className="w-32 h-32 rounded-full bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
-                      <ambientLight intensity={0.6} />
-                      <directionalLight position={[2, 2, 2]} intensity={0.8} />
-                      <Float speed={2} rotationIntensity={0.3}>
-                        <Box args={[0.7, 0.5, 0.1]}>
-                          <meshStandardMaterial color="#fbbf24" roughness={0.3} metalness={0.7} />
-                        </Box>
-                      </Float>
-                    </Canvas>
+                <div className="w-40 h-40 rounded-full border-8 border-yellow-400 flex items-center justify-center mx-auto relative overflow-hidden">
+                  <div className="absolute inset-0 rounded-full overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=400&fit=crop" 
+                      alt="Certification"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-yellow-400/30 group-hover:bg-yellow-400/20 transition-all duration-300"></div>
                   </div>
                 </div>
               </div>
@@ -548,12 +551,13 @@ export default function Home() {
       </section>
 
       {/* LMS Modules Section */}
-      <section id="modules" className="relative bg-gray-50 py-20">
+      <section id="modules" className="relative bg-gray-50 py-20 scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-gray-900">
@@ -573,12 +577,13 @@ export default function Home() {
       </section>
 
       {/* Development Timeline */}
-      <section id="timeline" className="relative bg-white py-20">
+      <section id="timeline" className="relative bg-white py-20 scroll-mt-20">
         <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-gray-900">
@@ -605,12 +610,17 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative bg-white py-20">
+      <section id="cta" className="relative bg-white py-20 scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, x: -100, rotateY: -15 }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ 
+              duration: 0.8,
+              type: "spring",
+              stiffness: 100
+            }}
             className="text-center bg-linear-to-r from-cyan-500 to-blue-500 rounded-2xl p-16 shadow-2xl"
           >
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-white">

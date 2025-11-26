@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Float, Sphere, Box, Torus } from "@react-three/drei";
+import { OrbitControls, Float, Sphere, Box, Torus, MeshDistortMaterial } from "@react-three/drei";
 import { motion } from "framer-motion";
 import * as THREE from "three";
 import Link from "next/link";
@@ -30,6 +30,86 @@ function FloatingCube({ position, color }: { position: [number, number, number];
         <meshStandardMaterial color={color} roughness={0.3} metalness={0.7} />
       </Box>
     </Float>
+  );
+}
+
+// Advanced 3D Background Elements for CTA
+function CTABackground3D() {
+  return (
+    <>
+      {/* Floating Spheres */}
+      <Float speed={2} rotationIntensity={1} floatIntensity={2} position={[-4, 2, -3]}>
+        <Sphere args={[0.5, 32, 32]}>
+          <MeshDistortMaterial
+            color="#ffffff"
+            attach="material"
+            distort={0.4}
+            speed={2}
+            roughness={0}
+            opacity={0.6}
+            transparent
+          />
+        </Sphere>
+      </Float>
+
+      <Float speed={1.5} rotationIntensity={0.8} floatIntensity={1.5} position={[4, -1, -3]}>
+        <Sphere args={[0.7, 32, 32]}>
+          <MeshDistortMaterial
+            color="#60a5fa"
+            attach="material"
+            distort={0.3}
+            speed={1.5}
+            roughness={0}
+            opacity={0.5}
+            transparent
+          />
+        </Sphere>
+      </Float>
+
+      {/* Rotating Torus */}
+      <Float speed={1.8} rotationIntensity={1.2} floatIntensity={1.8} position={[0, 0, -4]}>
+        <Torus args={[1, 0.3, 16, 32]}>
+          <MeshDistortMaterial
+            color="#fbbf24"
+            attach="material"
+            distort={0.2}
+            speed={1.8}
+            roughness={0}
+            opacity={0.4}
+            transparent
+          />
+        </Torus>
+      </Float>
+
+      {/* Floating Boxes */}
+      <Float speed={2.2} rotationIntensity={1.5} floatIntensity={2} position={[-3, -2, -2]}>
+        <Box args={[0.8, 0.8, 0.8]}>
+          <MeshDistortMaterial
+            color="#8b5cf6"
+            attach="material"
+            distort={0.25}
+            speed={2}
+            roughness={0}
+            opacity={0.5}
+            transparent
+          />
+        </Box>
+      </Float>
+
+      <Float speed={1.6} rotationIntensity={0.9} floatIntensity={1.6} position={[3, 2, -2]}>
+        <Box args={[0.6, 0.6, 0.6]}>
+          <MeshDistortMaterial
+            color="#10b981"
+            attach="material"
+            distort={0.3}
+            speed={1.6}
+            roughness={0}
+            opacity={0.5}
+            transparent
+          />
+        </Box>
+      </Float>
+    </>
   );
 }
 
@@ -427,13 +507,28 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative bg-white py-20">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="relative bg-white py-20 overflow-hidden">
+        {/* 3D Background Layer */}
+        <div className="absolute inset-0 opacity-30 pointer-events-none">
+          <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
+            <ambientLight intensity={0.8} />
+            <directionalLight position={[10, 10, 5]} intensity={1.5} />
+            <CTABackground3D />
+          </Canvas>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center bg-linear-to-r from-cyan-500 to-blue-500 rounded-2xl p-16 shadow-2xl"
+            initial={{ opacity: 0, x: 100, rotateY: 15 }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ 
+              duration: 0.9,
+              type: "spring",
+              stiffness: 80,
+              damping: 15
+            }}
+            className="text-center bg-linear-to-r from-cyan-500 to-blue-500 rounded-2xl p-16 shadow-2xl backdrop-blur-sm border border-white/20"
           >
             <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-white">
               Ready to Start Learning?
