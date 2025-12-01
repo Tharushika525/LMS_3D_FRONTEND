@@ -115,45 +115,23 @@ export default function LoginPage() {
         </Canvas>
       </div>
 
-      {/* Navigation */}
-      <motion.nav 
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+      {/* Home Button */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="relative z-50 w-full px-6 py-4 bg-gray-900/50 backdrop-blur-md"
+        className="absolute top-6 left-6 z-50"
       >
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-cyan-500 flex items-center justify-center text-white font-bold text-lg">
-              FS
-            </div>
-            <div>
-              <div className="font-bold text-xl text-white">FutureSkills</div>
-            </div>
-          </Link>
-
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-white hover:text-cyan-400 transition-colors">HOME</Link>
-            <Link href="/3d/About" className="text-white hover:text-cyan-400 transition-colors">ABOUT</Link>
-            <a href="#courses" className="text-white hover:text-cyan-400 transition-colors">COURSES</a>
-            <a href="#features" className="text-white hover:text-cyan-400 transition-colors">PAGES</a>
-            <a href="#contact" className="text-white hover:text-cyan-400 transition-colors">CONTACT</a>
-            <Link href="/3d/LogIn">
-              <button className="px-5 py-2 rounded border-2 border-white text-white font-semibold hover:bg-white hover:text-gray-900 transition-all">
-                Login
-              </button>
-            </Link>
-            <Link href="/3d/SignUp">
-              <button className="px-5 py-2 rounded bg-cyan-500 text-white font-semibold hover:bg-cyan-600 transition-all">
-                Sign Up
-              </button>
-            </Link>
-          </div>
-        </div>
-      </motion.nav>
+        <Link href="/">
+          <button className="flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white font-semibold hover:bg-white/20 hover:scale-105 transition-all shadow-lg">
+            <span className="text-xl">←</span>
+            <span>Back</span>
+          </button>
+        </Link>
+      </motion.div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex items-center justify-center min-h-[calc(100vh-80px)] px-6 py-12">
+      <div className="relative z-10 flex items-center justify-center min-h-screen px-6 py-12">
         <div className="w-full max-w-6xl grid md:grid-cols-2 gap-12 items-center">
           
           {/* Left Side - Welcome Message */}

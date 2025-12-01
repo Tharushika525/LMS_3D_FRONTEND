@@ -6,6 +6,8 @@ import { OrbitControls, Environment, Float, Sphere, Box, Torus } from "@react-th
 import { motion } from "framer-motion";
 import * as THREE from "three";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 interface LMSModule {
   title: string;
@@ -330,41 +332,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white text-gray-900 overflow-hidden scroll-smooth">
       {/* Navigation */}
-      <motion.nav 
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="fixed top-0 left-0 right-0 z-50 w-full px-6 py-4 bg-gray-900/95 backdrop-blur-sm shadow-lg"
-      >
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-cyan-500 flex items-center justify-center text-white font-bold text-lg">
-              FS
-            </div>
-            <div>
-              <div className="font-bold text-xl text-white">FutureSkills</div>
-            </div>
-          </div>
-
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#home" className="text-white hover:text-cyan-400 transition-colors cursor-pointer">HOME</a>
-            <Link href="/3d/About" className="text-white hover:text-cyan-400 transition-colors">ABOUT</Link>
-            <a href="#modules" className="text-white hover:text-cyan-400 transition-colors cursor-pointer">COURSES</a>
-            <a href="#features" className="text-white hover:text-cyan-400 transition-colors cursor-pointer">FEATURES</a>
-            <Link href="/3d/Contact" className="text-white hover:text-cyan-400 transition-colors">CONTACT</Link>
-            <Link href="/3d/LogIn">
-              <button className="px-5 py-2 rounded border-2 border-white text-white font-semibold hover:bg-white hover:text-gray-900 transition-all">
-                Login
-              </button>
-            </Link>
-            <Link href="/3d/SignUp">
-              <button className="px-5 py-2 rounded bg-cyan-500 text-white font-semibold hover:bg-cyan-600 transition-all">
-                Sign Up
-              </button>
-            </Link>
-          </div>
-        </div>
-      </motion.nav>
+      <Navbar />
 
       {/* Spacer for fixed navbar */}
       <div className="h-[72px]"></div>
@@ -644,52 +612,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="relative bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div className="md:col-span-2">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-linear-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-bold text-xl">
-                  S
-                </div>
-                <div>
-                  <div className="font-bold text-xl text-white">FutureSkills</div>
-                  <div className="text-sm text-gray-400">Learn. Grow. Succeed.</div>
-                </div>
-              </div>
-              <p className="text-gray-400 max-w-md">
-                Empowering learners worldwide with high-quality education. Master new skills, advance your career, and achieve your goals.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-white">Learn</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-cyan-400 transition-colors">Browse Courses</a></li>
-                <li><a href="#" className="hover:text-cyan-400 transition-colors">Become an Instructor</a></li>
-                <li><a href="#" className="hover:text-cyan-400 transition-colors">Pricing Plans</a></li>
-                <li><a href="#" className="hover:text-cyan-400 transition-colors">Success Stories</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-white">Company</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-cyan-400 transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-cyan-400 transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-cyan-400 transition-colors">Support</a></li>
-                <li><a href="#" className="hover:text-cyan-400 transition-colors">Privacy</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 pt-8 flex items-center justify-between text-gray-400">
-            <div>© 2025 skilled. All rights reserved.</div>
-            <div className="flex gap-6">
-              <a href="#" className="hover:text-cyan-400 transition-colors">Terms</a>
-              <a href="#" className="hover:text-cyan-400 transition-colors">Privacy</a>
-              <a href="#" className="hover:text-cyan-400 transition-colors">Cookies</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
