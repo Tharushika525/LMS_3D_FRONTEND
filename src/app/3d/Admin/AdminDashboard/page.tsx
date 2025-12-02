@@ -8,69 +8,164 @@ import { Float, Sphere, Box, Torus, MeshDistortMaterial, OrbitControls } from "@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-// Enhanced 3D Background
+// Enhanced 3D Background with Amazing Floating Blobs
 function DashboardBackground3D() {
   return (
     <>
-      <Float speed={1.5} rotationIntensity={1} floatIntensity={1.5} position={[-6, 2, -4]}>
-        <Sphere args={[0.8, 32, 32]}>
+      {/* Large Cyan Blob - Top Left */}
+      <Float speed={1.2} rotationIntensity={0.8} floatIntensity={2} position={[-8, 4, -6]}>
+        <Sphere args={[1.5, 64, 64]}>
           <MeshDistortMaterial
             color="#06b6d4"
             attach="material"
-            distort={0.4}
-            speed={2}
-            roughness={0}
-            metalness={0.8}
-            opacity={0.6}
-            transparent
-          />
-        </Sphere>
-      </Float>
-
-      <Float speed={1.8} rotationIntensity={1.2} floatIntensity={1.8} position={[5, -2, -3]}>
-        <Box args={[1, 1, 1]}>
-          <MeshDistortMaterial
-            color="#8b5cf6"
-            attach="material"
-            distort={0.3}
+            distort={0.6}
             speed={1.8}
-            roughness={0}
+            roughness={0.1}
             metalness={0.9}
             opacity={0.7}
             transparent
           />
-        </Box>
+        </Sphere>
       </Float>
 
-      <Float speed={2} rotationIntensity={0.8} floatIntensity={2} position={[0, 3, -5]}>
-        <Torus args={[1.2, 0.4, 16, 32]}>
+      {/* Medium Purple Blob - Right Side */}
+      <Float speed={1.5} rotationIntensity={1.2} floatIntensity={2.5} position={[7, -1, -5]}>
+        <Sphere args={[1.2, 64, 64]}>
+          <MeshDistortMaterial
+            color="#8b5cf6"
+            attach="material"
+            distort={0.5}
+            speed={2.2}
+            roughness={0.1}
+            metalness={1}
+            opacity={0.8}
+            transparent
+          />
+        </Sphere>
+      </Float>
+
+      {/* Green Blob - Top Center */}
+      <Float speed={1.8} rotationIntensity={1} floatIntensity={3} position={[0, 5, -7]}>
+        <Sphere args={[1, 64, 64]}>
           <MeshDistortMaterial
             color="#10b981"
             attach="material"
-            distort={0.25}
+            distort={0.7}
             speed={1.5}
-            roughness={0}
-            metalness={0.8}
-            opacity={0.5}
-            transparent
-          />
-        </Torus>
-      </Float>
-
-      <Float speed={1.6} rotationIntensity={1.4} floatIntensity={1.6} position={[-4, -3, -2]}>
-        <Sphere args={[0.6, 32, 32]}>
-          <MeshDistortMaterial
-            color="#f59e0b"
-            attach="material"
-            distort={0.35}
-            speed={2.2}
-            roughness={0}
+            roughness={0.2}
             metalness={0.8}
             opacity={0.6}
             transparent
           />
         </Sphere>
       </Float>
+
+      {/* Orange Blob - Bottom Left */}
+      <Float speed={2} rotationIntensity={1.5} floatIntensity={2.2} position={[-5, -4, -4]}>
+        <Sphere args={[0.9, 64, 64]}>
+          <MeshDistortMaterial
+            color="#f59e0b"
+            attach="material"
+            distort={0.55}
+            speed={2.5}
+            roughness={0.1}
+            metalness={0.9}
+            opacity={0.75}
+            transparent
+          />
+        </Sphere>
+      </Float>
+
+      {/* Pink Blob - Center Right */}
+      <Float speed={1.4} rotationIntensity={1.3} floatIntensity={2.8} position={[6, 2, -6]}>
+        <Sphere args={[1.1, 64, 64]}>
+          <MeshDistortMaterial
+            color="#ec4899"
+            attach="material"
+            distort={0.65}
+            speed={1.9}
+            roughness={0.15}
+            metalness={0.95}
+            opacity={0.7}
+            transparent
+          />
+        </Sphere>
+      </Float>
+
+      {/* Small Blue Blob - Bottom Right */}
+      <Float speed={2.2} rotationIntensity={1.8} floatIntensity={3.2} position={[4, -5, -3]}>
+        <Sphere args={[0.7, 64, 64]}>
+          <MeshDistortMaterial
+            color="#3b82f6"
+            attach="material"
+            distort={0.8}
+            speed={2.8}
+            roughness={0.1}
+            metalness={1}
+            opacity={0.8}
+            transparent
+          />
+        </Sphere>
+      </Float>
+
+      {/* Small Teal Blob - Left Center */}
+      <Float speed={1.7} rotationIntensity={1.1} floatIntensity={2.4} position={[-7, -1, -5]}>
+        <Sphere args={[0.8, 64, 64]}>
+          <MeshDistortMaterial
+            color="#14b8a6"
+            attach="material"
+            distort={0.6}
+            speed={2.1}
+            roughness={0.1}
+            metalness={0.85}
+            opacity={0.65}
+            transparent
+          />
+        </Sphere>
+      </Float>
+
+      {/* Tiny Red Blob - Far Right */}
+      <Float speed={2.5} rotationIntensity={2} floatIntensity={3.5} position={[8, 3, -8]}>
+        <Sphere args={[0.6, 64, 64]}>
+          <MeshDistortMaterial
+            color="#ef4444"
+            attach="material"
+            distort={0.75}
+            speed={3}
+            roughness={0.1}
+            metalness={0.9}
+            opacity={0.7}
+            transparent
+          />
+        </Sphere>
+      </Float>
+
+      {/* Ambient floating particles */}
+      {Array.from({ length: 15 }).map((_, i) => (
+        <Float
+          key={i}
+          speed={1 + Math.random() * 2}
+          rotationIntensity={Math.random() * 2}
+          floatIntensity={2 + Math.random() * 2}
+          position={[
+            (Math.random() - 0.5) * 20,
+            (Math.random() - 0.5) * 15,
+            -3 - Math.random() * 8
+          ]}
+        >
+          <Sphere args={[0.1 + Math.random() * 0.2, 16, 16]}>
+            <meshStandardMaterial
+              color={`hsl(${Math.random() * 360}, 70%, 60%)`}
+              emissive={`hsl(${Math.random() * 360}, 70%, 50%)`}
+              emissiveIntensity={0.5}
+              roughness={0.2}
+              metalness={0.8}
+              opacity={0.4}
+              transparent
+            />
+          </Sphere>
+        </Float>
+      ))}
     </>
   );
 }
@@ -105,12 +200,22 @@ export default function AdminDashboard() {
   return (
     <div className="relative min-h-screen bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
       {/* 3D Background */}
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-20">
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-30">
         <Canvas camera={{ position: [0, 0, 10], fov: 50 }}>
-          <ambientLight intensity={1} />
-          <directionalLight position={[10, 10, 5]} intensity={2} />
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 5]} intensity={1.5} color="#ffffff" />
+          <directionalLight position={[-10, -10, -5]} intensity={0.8} color="#06b6d4" />
+          <pointLight position={[0, 0, 5]} intensity={1} color="#8b5cf6" />
+          <spotLight position={[5, 5, 5]} angle={0.3} penumbra={1} intensity={1} color="#10b981" />
           <DashboardBackground3D />
-          <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.3} />
+          <OrbitControls 
+            enableZoom={false} 
+            autoRotate 
+            autoRotateSpeed={0.5} 
+            enablePan={false}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 2}
+          />
         </Canvas>
       </div>
 
@@ -182,12 +287,12 @@ export default function AdminDashboard() {
 
           {/* Main Content Grid */}
           <div className="grid lg:grid-cols-3 gap-8 mb-12">
-            {/* Course Performance */}
+            {/* Course Performance - Sticky */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="lg:col-span-2 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-xl"
+              className="lg:col-span-2 sticky top-24 self-start bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-xl"
             >
               <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
                 <span className="text-cyan-400">📊</span>
@@ -223,12 +328,12 @@ export default function AdminDashboard() {
               </div>
             </motion.div>
 
-            {/* Recent Activity */}
+            {/* Recent Activity - Sticky */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-xl"
+              className="sticky top-24 self-start bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-xl"
             >
               <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
                 <span className="text-purple-400">⚡</span>
